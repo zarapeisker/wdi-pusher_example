@@ -17,7 +17,6 @@ class MainController < ApplicationController
 
   def other_chat
     @message = params[:message][:text]
-    @room = params[:message][:room]
     @user = params[:user][:username]
     Message.create(content: @message, room: 'other_chat')
     User.create(username: @user)
