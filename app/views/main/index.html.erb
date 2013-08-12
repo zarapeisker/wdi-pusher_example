@@ -1,8 +1,39 @@
-<h1>Pusher Example</h1>
+<h1>Chat</h1>
 
-<ul id="messages"></ul>
-
-<%= form_for :message, :url => send_message_path, :method => "post" do |f| %>
+<%= form_for :message, :url => chat_path, :method => "post", :remote => true do |f| %>
+  <div><%= f.label :text %></div>
   <div><%= f.text_area :text, :rows => 5 %></div>
+  <%= fields_for :user do |u| %>
+  <div><%= u.label :username %></div>
+  <div><%= u.text_field :username %></div>
+  <% end %>
   <%= f.submit "Send" %>
 <% end %>
+
+<ul id="messages">
+  <% @messages.each do |message| %>
+    <% if message.room == "chat" %>
+      <li><%= message.content %></li>
+    <% end %>
+  <% end %>
+</ul>
+
+<h1>Other Chat</h1>
+
+<%= form_for :message, :url => other_chat_path, :method => "post", :remote => true do |f| %>
+  <div><%= f.label :text %></div>
+  <div><%= f.text_area :text, :rows => 5 %></div>
+  <%= fields_for :user do |u| %>
+  <div><%= u.label :username %></div>
+  <div><%= u.text_field :username %></div>
+  <% end %>
+  <%= f.submit "Send" %>
+<% end %>
+
+<ul id="other_messages">
+  <% @messages.each do |message| %>
+    <% if message.room == "other_chat" %>
+      <li><%= message.content %></li>
+    <% end %>
+  <% end %>
+</ul>

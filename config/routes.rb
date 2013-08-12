@@ -1,4 +1,5 @@
 PusherExample::Application.routes.draw do
-  post 'send_message' => 'main#send_message', :as => "send_message"
+  post 'chat' => 'main#chat', :as => "chat"
+  post 'other_chat' => 'main#other_chat', :as => "other_chat"
   root :to => "main#index"
 end
